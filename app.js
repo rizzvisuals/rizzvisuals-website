@@ -59,7 +59,7 @@
     if (!collectionGrid) return;
     const data = [
       ['Yosemite','the-last-light','Granite, weather, and sky'],
-      ['Coast','drop-in','Fog, surf, and sea cliffs'],
+      ['Coast','coastal-noir','Fog, surf, and sea cliffs'],
       ['Forest','between-giants','Redwoods and fleeting light'],
       ['Wildlife','crossing-the-silence','Unscripted crossings'],
       ['Urban','framed-city','Fog, geometry, and motion'],
