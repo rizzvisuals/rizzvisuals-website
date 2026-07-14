@@ -35,7 +35,10 @@
 
   <main>
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <img class="hero-image" src="21-the-last-light.jpg" alt="Half Dome glowing at sunset with the moon rising in Yosemite National Park" fetchpriority="high">
+      <picture class="hero-media">
+        <source media="(max-width: 600px)" srcset="21-the-last-light-mobile.jpg">
+        <img class="hero-image" src="21-the-last-light.jpg" alt="Half Dome glowing at sunset with the moon rising in Yosemite National Park" fetchpriority="high">
+      </picture>
       <div class="hero-shade"></div>
       <div class="hero-copy reveal">
         <p class="eyebrow">Northern California fine art photography</p>
@@ -120,7 +123,10 @@
   </main>
 
   <footer>
-    <div><strong>RIZZ<span>VISUALS</span></strong><small>Wild places. Fleeting light.</small></div>
+    <div class="footer-brand"><strong>RIZZ<span>VISUALS</span></strong><small>Wild places. Fleeting light.</small></div>
+    <div class="artist-mark" aria-label="Ian Rizzari artist mark" title="Ian Rizzari">
+      <span class="mark-i">I</span><span class="mark-r">R</span>
+    </div>
     <p>© <span id="year"></span> Ian Rizzari. All rights reserved.</p>
     <a href="#home">Back to top ↑</a>
   </footer>
