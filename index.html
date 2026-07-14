@@ -1,11 +1,132 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Rizzvisuals fine art photography"><title>Rizzvisuals | Fine Art Photography</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body>
-<header><a class="brand" href="#top">RIZZVISUALS</a><button id="menu">Menu</button><nav><a href="#collections">Collections</a><a href="#featured">Featured</a><a href="#about">About</a><a data-shop href="#">Shop Prints</a></nav></header>
-<main id="top"><section class="hero"><div id="heroSlides"></div><div class="shade"></div><div class="heroCopy"><p class="eyebrow">Fine Art Photography</p><h1>Atmosphere.<br>Silence.<br>Wild light.</h1><p>California landscapes and fleeting moments shaped by fog, weather, coastlines, forests, and sky.</p><div class="actions"><a class="btn light" href="#collections">Enter the Collections</a><a class="btn" data-shop href="#">Shop Prints</a></div></div><div id="heroCredit"></div></section>
-<section class="section" id="collections"><div class="sectionHead"><div><p class="eyebrow">The Work</p><h2>Collections</h2></div><p>A series of visual rooms, each shaped by a different kind of place, weather, and light.</p></div><div id="collectionGrid" class="collectionGrid"></div></section>
-<section class="featured" id="featured"><div class="featuredIntro"><p class="eyebrow">Featured Work</p><h2>Slow moments,<br>made permanent.</h2><p>Each photograph begins with waiting: for fog to open, the moon to rise, a bird to cross the frame, or the last light to find the landscape.</p></div><div id="featuredStack" class="featuredStack"></div></section>
-<section class="quote">“The landscape is never still. The photograph is the moment it briefly becomes one thing.”</section>
-<section class="about" id="about"><img src="04-into-the-light.jpg" alt="Light moving through a forest"><div><p class="eyebrow">About</p><h2>Photographs shaped by patience and place.</h2><p>Rizzvisuals is the work of Northern California photographer Ian Rizzari. The collection follows the changing atmosphere of the West—from coastal fog and ancient forests to mountain light, night skies, wildlife, and weather.</p><p>The goal is simple: preserve moments that would otherwise disappear within seconds.</p><a data-shop href="#">Explore available prints ↗</a></div></section>
-<section class="section prints"><div><p class="eyebrow">Fine Art Prints</p><h2>Bring the landscape home.</h2><p>Selected photographs are available through the Rizzvisuals SmugMug store.</p></div><a class="btn light" data-shop href="#">Shop the Collection</a></section></main>
-<footer><span>RIZZVISUALS</span><span>© <span id="year"></span> Ian Rizzari</span></footer>
-<dialog id="artDialog"><button id="close">×</button><img id="dialogImg" alt=""><div><p class="eyebrow" id="dialogCollection"></p><h2 id="dialogTitle"></h2><p id="dialogText"></p><a class="btn light" id="dialogBuy" target="_blank" rel="noopener">Buy Print</a></div></dialog>
-<script src="site-config.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RizzVisuals — fine art photography shaped by fog, weather, wild places, and fleeting light.">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>RizzVisuals | Fine Art Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="RizzVisuals home">
+      <span class="brand-name">RIZZ<span>VISUALS</span></span>
+      <span class="brand-sub">PHOTOGRAPHY</span>
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="nav" aria-label="Primary navigation">
+      <a href="#signature">Signature Works</a>
+      <a href="#collections">Collections</a>
+      <a href="#about">About</a>
+      <a href="#prints">Prints</a>
+      <a class="nav-shop" href="https://rizzvisuals.smugmug.com/Signature-Collection-1" target="_blank" rel="noopener">Shop</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <img src="assets/images/hero-half-dome.jpg" alt="Moon above Half Dome in Yosemite National Park">
+      <div class="hero-shade"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Northern California fine art photography</p>
+        <h1 id="hero-title">Wild places.<br>Fleeting light.</h1>
+        <p class="hero-lead">Photographs made when familiar landscapes become briefly unrepeatable.</p>
+        <div class="hero-actions">
+          <a class="button light" href="#signature">Enter the gallery</a>
+          <a class="text-link" href="https://rizzvisuals.smugmug.com/Signature-Collection-1" target="_blank" rel="noopener">Shop prints ↗</a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#intro" aria-label="Scroll to introduction">Scroll</a>
+    </section>
+
+    <section class="intro section-pad" id="intro">
+      <p class="eyebrow">RizzVisuals Photography</p>
+      <h2 class="reveal">Atmosphere is the subject.</h2>
+      <p class="lead reveal">Fog swallowing a coastline. First light entering old forests. Birds crossing a quiet sky. RizzVisuals is built around rare conditions, patient observation, and the moments that disappear almost as soon as they arrive.</p>
+    </section>
+
+    <section class="signature section-pad" id="signature">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">Opening exhibition</p>
+          <h2>Signature Works</h2>
+        </div>
+        <p>Twelve photographs selected for atmosphere, print presence, and a strong sense of place.</p>
+      </div>
+      <div class="gallery" id="signature-grid"></div>
+    </section>
+
+    <section class="featured-story">
+      <div class="featured-image reveal">
+        <img src="assets/images/crossing-the-silence.jpg" alt="Pelicans crossing in front of the Golden Gate Bridge">
+      </div>
+      <div class="featured-copy reveal">
+        <p class="eyebrow">Behind the image</p>
+        <h2>Crossing the Silence</h2>
+        <p class="location">Golden Gate Bridge · San Francisco, California</p>
+        <p>Marine fog softened the bridge until the structure nearly disappeared. A small formation of pelicans crossed the opening at exactly the right height, turning a familiar landmark into a quiet wildlife moment.</p>
+        <a class="button dark" href="artwork.html?id=crossing-the-silence">View the story</a>
+      </div>
+    </section>
+
+    <section class="collections section-pad" id="collections">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow">Explore by place and mood</p><h2>Collections</h2></div>
+        <p>Focused bodies of work rather than an endless archive.</p>
+      </div>
+      <div class="collection-grid">
+        <a class="collection-card reveal" href="#signature" data-filter="Yosemite"><img src="assets/images/hero-half-dome.jpg" alt="Yosemite landscape"><span><b>Yosemite</b><small>Granite, weather, and moonlight</small></span></a>
+        <a class="collection-card reveal" href="#signature" data-filter="Coast"><img src="assets/images/coastal-cypress.jpg" alt="Foggy California coastline"><span><b>California Coast</b><small>Fog, surf, and sea cliffs</small></span></a>
+        <a class="collection-card reveal" href="#signature" data-filter="Forest"><img src="assets/images/between-giants.jpg" alt="Sunlight in a redwood forest"><span><b>Forests</b><small>Redwoods and fleeting light</small></span></a>
+        <a class="collection-card reveal" href="#signature" data-filter="Wildlife"><img src="assets/images/crossing-the-silence.jpg" alt="Pelicans near Golden Gate Bridge"><span><b>Wildlife</b><small>Unscripted crossings</small></span></a>
+        <a class="collection-card reveal" href="#signature" data-filter="Aerial"><img src="assets/images/above-the-clouds.jpg" alt="Trail above a sea of clouds"><span><b>Above the Clouds</b><small>Aerial and elevated perspectives</small></span></a>
+        <a class="collection-card reveal" href="#signature" data-filter="Urban"><img src="assets/images/framed-city.jpg" alt="San Francisco framed by Golden Gate Bridge"><span><b>San Francisco</b><small>Fog, geometry, and motion</small></span></a>
+      </div>
+    </section>
+
+    <section class="about section-pad" id="about">
+      <div class="about-copy reveal">
+        <p class="eyebrow">About the photographer</p>
+        <h2>Chasing conditions, not checklists.</h2>
+        <p>Ian Rizzari is a Northern California photographer drawn to coastlines, forests, wildlife, mountains, and the weather that transforms them. His work looks beyond the postcard view toward moments of scale, solitude, tension, and quiet.</p>
+        <p>Every Signature Work is selected for its ability to hold attention in print—not simply because it records a beautiful place.</p>
+      </div>
+      <blockquote class="reveal">“The photograph begins when a familiar place stops looking familiar.”</blockquote>
+    </section>
+
+    <section class="prints" id="prints">
+      <div class="prints-image reveal"><img src="assets/images/between-giants.jpg" alt="Fine art forest photograph"></div>
+      <div class="prints-copy reveal">
+        <p class="eyebrow">Collector prints</p>
+        <h2>Made to hold a room.</h2>
+        <p>Signature photographs are offered through SmugMug in carefully selected formats. Metal brings depth and luminosity to coast, fog, and city work; fine-art paper suits subtle forest detail and softer atmosphere.</p>
+        <div class="format-list">
+          <div><span>Fine Art Paper</span><small>Archival, tactile, understated</small></div>
+          <div><span>Metal</span><small>Luminous, durable, ready to hang</small></div>
+          <div><span>Canvas & Acrylic</span><small>Available on selected works</small></div>
+        </div>
+        <a class="button dark" href="https://rizzvisuals.smugmug.com/Signature-Collection-1" target="_blank" rel="noopener">Shop the Signature Collection</a>
+      </div>
+    </section>
+
+    <section class="contact section-pad" id="contact">
+      <p class="eyebrow">Collector, gallery, and licensing inquiries</p>
+      <h2 class="reveal">Bring the landscape home.</h2>
+      <p class="reveal">For custom sizing, commercial placement, licensing, or exhibition opportunities, email <a href="mailto:hello@rizzvisuals.com">hello@rizzvisuals.com</a>.</p>
+      <a class="button light reveal" href="mailto:hello@rizzvisuals.com?subject=RizzVisuals%20Inquiry">Start an inquiry</a>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>RIZZ<span>VISUALS</span></strong><small>Wild places. Fleeting light.</small></div>
+    <p>© <span id="year"></span> Ian Rizzari. All rights reserved.</p>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
