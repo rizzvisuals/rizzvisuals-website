@@ -58,14 +58,18 @@
   function renderCollections() {
     if (!collectionGrid) return;
     const data = [
-      ['Yosemite','06-iridescence.jpg','Granite, weather, and sky'],
-      ['Coast','11-beacon.jpg','Fog, surf, and sea cliffs'],
-      ['Forest','01-between-giants.jpg','Redwoods and fleeting light'],
-      ['Wildlife','20-crossing-the-silence.jpg','Unscripted crossings'],
-      ['Urban','07-framed-city.jpg','Fog, geometry, and motion'],
-      ['Night','12-cathedral-of-stars.jpg','Stars, moonlight, and quiet']
+      ['Yosemite','the-last-light','Granite, weather, and sky'],
+      ['Coast','drop-in','Fog, surf, and sea cliffs'],
+      ['Forest','between-giants','Redwoods and fleeting light'],
+      ['Wildlife','crossing-the-silence','Unscripted crossings'],
+      ['Urban','framed-city','Fog, geometry, and motion'],
+      ['Night','cathedral-of-stars','Stars, moonlight, and quiet']
     ];
-    collectionGrid.innerHTML = data.map(([name,img,desc]) => `<a class="collection-card reveal" href="#signature" data-collection="${name}"><img src="${img}" alt="${name} collection" loading="lazy"><span><b>${name==='Coast'?'California Coast':name}</b><small>${desc}</small></span></a>`).join('');
+    collectionGrid.innerHTML = data.map(([name,workId,desc]) => {
+      const cover = config.works.find(w => w.id === workId);
+      if (!cover) return '';
+      return `<a class="collection-card reveal" href="#signature" data-collection="${escapeHtml(name)}"><img src="${escapeHtml(cover.file)}" alt="${escapeHtml(name)} collection" loading="lazy" style="object-position:${escapeHtml(cover.position)}"><span><b>${name==='Coast'?'California Coast':escapeHtml(name)}</b><small>${escapeHtml(desc)}</small></span></a>`;
+    }).join('');
     $$('[data-collection]', collectionGrid).forEach(card => card.addEventListener('click', () => {active=card.dataset.collection; renderFilters(); renderWorks();}));
   }
 
