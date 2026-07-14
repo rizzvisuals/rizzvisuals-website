@@ -1,4 +1,92 @@
-const c=window.RIZZ_CONFIG,$=(s,p=document)=>p.querySelector(s),$$=(s,p=document)=>[...p.querySelectorAll(s)];$$('[data-shop]').forEach(a=>{a.href=c.shopUrl;a.target='_blank';a.rel='noopener'});$('#year').textContent=new Date().getFullYear();addEventListener('scroll',()=>document.querySelector('header').classList.toggle('scrolled',scrollY>30));$('#menu').onclick=()=>document.querySelector('nav').classList.toggle('open');
-const hs=$('#heroSlides');c.heroImages.forEach((f,i)=>{const d=document.createElement('div');d.className='slide'+(i?'':' active');d.innerHTML=`<img src="${f}" alt="Rizzvisuals photograph">`;hs.appendChild(d)});let hi=0,slides=$$('.slide');function credit(){const a=c.artworks.find(x=>x[0]===c.heroImages[hi]);$('#heroCredit').textContent=a?`${a[1]} · ${a[2]}`:''}credit();setInterval(()=>{slides[hi].classList.remove('active');hi=(hi+1)%slides.length;slides[hi].classList.add('active');credit()},6500);
-const cg=$('#collectionGrid');c.collections.forEach(x=>{const e=document.createElement('article');e.className='collection';e.innerHTML=`<img src="${x.cover}" alt="${x.name} collection"><div><p class="eyebrow">Collection</p><h3>${x.name}</h3><p>${x.description}</p></div>`;e.onclick=()=>$('#featured').scrollIntoView({behavior:'smooth'});cg.appendChild(e)});
-const fs=$('#featuredStack'),dlg=$('#artDialog');function openArt(a){$('#dialogImg').src=a[0];$('#dialogTitle').textContent=a[1];$('#dialogCollection').textContent=a[2];$('#dialogText').textContent=a[3];$('#dialogBuy').href=c.shopUrl;dlg.showModal()}c.artworks.forEach(a=>{const e=document.createElement('article');e.className='piece';e.innerHTML=`<img src="${a[0]}" alt="${a[1]}"><div class="pieceMeta"><div><h3>${a[1]}</h3><p>${a[3]}</p></div><span>${a[2]}</span></div>`;e.onclick=()=>openArt(a);fs.appendChild(e)});$('#close').onclick=()=>dlg.close();dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+(() => {
+  const config = window.RIZZ_CONFIG;
+  if (!config) return;
+  const $ = (s, p=document) => p.querySelector(s);
+  const $$ = (s, p=document) => [...p.querySelectorAll(s)];
+  const escapeHtml = (str='') => str.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+  document.documentElement.classList.add('js');
+  window.addEventListener('load', () => document.body.classList.add('loaded'));
+  const year = $('#year'); if (year) year.textContent = new Date().getFullYear();
+  $$('[data-shop-link]').forEach(a => a.href = config.shopUrl);
+  const email = $('#email-link'); if (email) email.href = `mailto:${config.email}?subject=RizzVisuals%20Inquiry`;
+
+  const header = $('#site-header');
+  const updateHeader = () => header && header.classList.toggle('scrolled', scrollY > 30);
+  updateHeader(); addEventListener('scroll', updateHeader, {passive:true});
+
+  const menu = $('.menu-btn'), nav = $('#site-nav');
+  menu?.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') === 'true';
+    menu.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('open', !open);
+    document.body.classList.toggle('menu-open', !open);
+  });
+  $$('#site-nav a').forEach(a => a.addEventListener('click', () => {
+    menu?.setAttribute('aria-expanded','false'); nav?.classList.remove('open'); document.body.classList.remove('menu-open');
+  }));
+
+  const reveal = () => {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    }), {threshold:.12, rootMargin:'0px 0px -6%'});
+    $$('.reveal').forEach(el => io.observe(el));
+  };
+
+  const grid = $('#signature-grid');
+  const filters = $('#filters');
+  const collectionGrid = $('#collection-grid');
+  const featured = config.works.filter(w => w.featured);
+  const collections = ['All', ...new Set(config.works.map(w => w.collection))];
+  let active = 'All';
+
+  function renderWorks() {
+    if (!grid) return;
+    const works = featured.filter(w => active === 'All' || w.collection === active);
+    grid.innerHTML = works.map((w,i) => `
+      <a class="work-card reveal ${i % 5 === 0 ? 'wide' : ''}" href="artwork.html?id=${encodeURIComponent(w.id)}" aria-label="View ${escapeHtml(w.title)}">
+        <figure><img src="${escapeHtml(w.file)}" alt="${escapeHtml(w.title)} — ${escapeHtml(w.location)}" loading="lazy" style="object-position:${escapeHtml(w.position)}"></figure>
+        <div class="work-meta"><span>Signature Work ${String(config.works.indexOf(w)+1).padStart(2,'0')}</span><h3>${escapeHtml(w.title)}</h3><p>${escapeHtml(w.location)}</p></div>
+      </a>`).join('');
+    reveal();
+  }
+  function renderFilters() {
+    if (!filters) return;
+    filters.innerHTML = collections.filter(c => c === 'All' || featured.some(w => w.collection === c)).map(c => `<button class="filter ${c===active?'active':''}" data-filter="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join('');
+    $$('.filter', filters).forEach(b => b.addEventListener('click', () => {active=b.dataset.filter; renderFilters(); renderWorks();}));
+  }
+  function renderCollections() {
+    if (!collectionGrid) return;
+    const data = [
+      ['Yosemite','06-iridescence.jpg','Granite, weather, and sky'],
+      ['Coast','11-beacon.jpg','Fog, surf, and sea cliffs'],
+      ['Forest','01-between-giants.jpg','Redwoods and fleeting light'],
+      ['Wildlife','20-crossing-the-silence.jpg','Unscripted crossings'],
+      ['Urban','07-framed-city.jpg','Fog, geometry, and motion'],
+      ['Night','12-cathedral-of-stars.jpg','Stars, moonlight, and quiet']
+    ];
+    collectionGrid.innerHTML = data.map(([name,img,desc]) => `<a class="collection-card reveal" href="#signature" data-collection="${name}"><img src="${img}" alt="${name} collection" loading="lazy"><span><b>${name==='Coast'?'California Coast':name}</b><small>${desc}</small></span></a>`).join('');
+    $$('[data-collection]', collectionGrid).forEach(card => card.addEventListener('click', () => {active=card.dataset.collection; renderFilters(); renderWorks();}));
+  }
+
+  const artworkRoot = $('#artwork-root');
+  if (artworkRoot) {
+    const id = new URLSearchParams(location.search).get('id');
+    const w = config.works.find(x => x.id === id) || config.works[0];
+    document.title = `${w.title} | RizzVisuals`;
+    artworkRoot.innerHTML = `
+      <article class="artwork-detail">
+        <section class="artwork-hero"><img src="${escapeHtml(w.file)}" alt="${escapeHtml(w.title)} — ${escapeHtml(w.location)}"><div class="artwork-counter">Signature Work ${String(config.works.indexOf(w)+1).padStart(2,'0')}</div></section>
+        <section class="artwork-story section-pad">
+          <div class="artwork-title reveal"><p class="eyebrow">${escapeHtml(w.collection)} Collection</p><h1>${escapeHtml(w.title)}</h1><p class="location">${escapeHtml(w.location)}</p></div>
+          <div class="story-copy reveal"><p>${escapeHtml(w.story)}</p><dl><div><dt>Recommended finish</dt><dd>${escapeHtml(w.medium)}</dd></div><div><dt>Presentation</dt><dd>${escapeHtml(w.sizes)}</dd></div></dl><a class="button dark" href="${config.shopUrl}" target="_blank" rel="noopener">View print options ↗</a></div>
+        </section>
+        <nav class="artwork-nav" aria-label="Other signature works">
+          ${(() => { const i=config.works.indexOf(w), prev=config.works[(i-1+config.works.length)%config.works.length], next=config.works[(i+1)%config.works.length]; return `<a href="artwork.html?id=${prev.id}"><span>Previous</span><b>${escapeHtml(prev.title)}</b></a><a href="artwork.html?id=${next.id}"><span>Next</span><b>${escapeHtml(next.title)}</b></a>`; })()}
+        </nav>
+      </article>`;
+  } else {
+    renderFilters(); renderWorks(); renderCollections();
+  }
+  reveal();
+})();
