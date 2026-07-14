@@ -1,6 +1,6 @@
 window.RIZZ_CONFIG = {
   shopUrl: "https://rizzvisuals.smugmug.com/Signature-Collection-1",
-  email: "hello@rizzvisuals.com",
+  email: "rizzvisuals@gmail.com",
   works: [
     {id:"the-last-light",file:"21-the-last-light.jpg",title:"The Last Light",location:"Yosemite National Park, California",collection:"Yosemite",featured:true,position:"center 42%",story:"As the day’s final light swept across Half Dome, the granite glowed for only a few moments before fading into twilight. With the moon rising beside the summit, the familiar landscape became something quieter—a reminder that even iconic places are constantly changing.",medium:"Metal or fine-art paper",sizes:"Best at medium to large scale"},
     {id:"between-giants",file:"01-between-giants.jpg",title:"Between Giants",location:"Northern California Redwoods",collection:"Forest",featured:true,position:"center",story:"Morning light entered the redwoods in narrow bands, revealing the scale and stillness of the forest for only a few minutes. The scene felt less like a place being photographed and more like a space briefly opening.",medium:"Fine-art paper or metal",sizes:"Best at medium to large scale"},
